@@ -8,7 +8,6 @@ async function loadCommits() {
         // send request
         const response = await fetch(`https://api.github.com/repos/${username}/${repo}/commits`)
 
-        console.log(response);
         // check for errors
         if (!response.ok) {
             throw new Error(`${response.status} ${response.statusText}`);
