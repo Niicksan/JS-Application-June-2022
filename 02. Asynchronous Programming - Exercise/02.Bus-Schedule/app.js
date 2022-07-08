@@ -1,10 +1,9 @@
 function solve() {
-    const info = document.getElementById('info');
+    const info = document.querySelector('.info');
     const departBtn = document.getElementById('depart');
     const arriveBtn = document.getElementById('arrive');
 
     let stop = {
-        name: 'Subway Station Vardar',
         next: 'depot'
     }
 
@@ -21,8 +20,7 @@ function solve() {
                 throw new Error('Error');
             }
 
-            const data = await response.json();
-            stop = data;
+            stop = await response.json();
 
             info.textContent = `Next stop ${stop.name}`;
         } catch (error) {
