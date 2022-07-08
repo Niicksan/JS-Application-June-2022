@@ -18,7 +18,6 @@ function attachEvents() {
             const locations = await request('http://localhost:3030/jsonstore/forecaster/locations');
 
             const city = locations.find(c => c.name == location.value);
-            console.log(city);
 
             if (city == undefined) {
                 throw new Error('Error');
@@ -26,7 +25,6 @@ function attachEvents() {
 
             const todayForecast = await request(`http://localhost:3030/jsonstore/forecaster/today/${city.code}`);
             const { condition, high, low } = todayForecast.forecast;
-
 
             divForecasts.classList.add('forecasts');
 
@@ -47,7 +45,6 @@ function attachEvents() {
             forecast.removeAttribute('style');
 
             const upcomingForecast = await request(`http://localhost:3030/jsonstore/forecaster/upcoming/${city.code}`);
-
 
             divForecastInfo.classList.add('forecast-info');
 
