@@ -30,7 +30,7 @@ function attachEvents() {
         request(url, 'post');
     }
 
-    async function deleteContact(event) {
+    function deleteContact(event) {
         var parent = event.target.parentElement;
         request(url, 'delete', parent);
     }
