@@ -31,7 +31,6 @@ function attachEvents() {
     }
 
     async function deleteContact(event) {
-        var target = event.target;
         var parent = event.target.parentElement;
         request(url, 'delete', parent);
     }
@@ -82,6 +81,7 @@ function attachEvents() {
                 phone.value = '';
             } else if (method == 'delete') {
                 const id = parent.id;
+
                 const response = await fetch(`${url}/${id}`, {
                     method: 'delete',
                 });
