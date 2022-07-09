@@ -9,7 +9,6 @@ function attachEvents() {
         phoneBook.innerHTML = '';
         const contacts = await request(url, 'get');
         const contactsAsArray = Object.values(contacts);
-        console.log(contactsAsArray);
 
         contactsAsArray.forEach(createElement);
 
