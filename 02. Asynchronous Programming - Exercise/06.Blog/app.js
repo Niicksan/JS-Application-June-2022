@@ -39,7 +39,7 @@ function attachEvents() {
             const response = await fetch(url);
 
             if (!response.ok) {
-                throw new Error('Error');
+                throw new Error('Error fetching the request');
             }
 
             return await response.json();
@@ -59,7 +59,7 @@ function attachEvents() {
 
     function createPost(post, comments) {
         document.getElementById('post-title').textContent = post.title;
-        document.getElementById('post-body').textContent = post.content;
+        document.getElementById('post-body').textContent = post.body;
 
         const ul = document.getElementById('post-comments');
         ul.innerHTML = '';
