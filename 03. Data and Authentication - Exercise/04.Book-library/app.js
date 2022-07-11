@@ -32,16 +32,17 @@ async function bookStore() {
 
         if (button == 'Submit') {
             request(url, 'post', 'id', event);
+
+            form.title.textContent = 'FORM'
+            form.button.textContent = 'Submit';
+
+            bookForEdit = {};
         } else if (button == 'Save') {
             request(url, 'put', bookForEdit.id, event);
         }
 
-        bookForEdit = {};
         input.title.value = '';
         input.author.value = '';
-
-        form.title.textContent = 'FORM'
-        form.button.textContent = 'Submit';
 
         getBooks();
     }
