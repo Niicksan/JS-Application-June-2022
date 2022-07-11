@@ -26,18 +26,18 @@ async function lockedProfile() {
         div.innerHTML = ` 
 			<img src="./iconProfile2.png" class="userIcon" />
 			<label>Lock</label>
-			<input type="radio" name="user${profile.username}Locked" value="lock" checked>
+			<input type="radio" name="user1Locked" value="lock" checked>
 			<label>Unlock</label>
-			<input type="radio" name="user${profile.username}Locked" value="unlock"><br>
+			<input type="radio" name="user1Locked" value="unlock"><br>
 			<hr>
 			<label>username</label>
-			<input type="text" name="user${profile.username}" value="${profile.username}" disabled readonly />
-			<div class="user${profile.username}HiddenFields">
+			<input type="text" name="user1Username" value="${profile.username}" disabled readonly />
+			<div class="user1HiddenFields">
 				<hr>
 				<label>Email:</label>
-				<input type="email" name="${profile.username}Email" value="${profile.email}" disabled readonly />
+				<input type="email" name="user1Email" value="${profile.email}" disabled readonly />
 				<label>Age:</label>
-				<input type="text" name="${profile.username}Age" value="${profile.age}" disabled readonly />
+				<input type="email" name="user1Age" value="${profile.age}" disabled readonly />
 			</div>
 				
 			<button>Show more</button>		
