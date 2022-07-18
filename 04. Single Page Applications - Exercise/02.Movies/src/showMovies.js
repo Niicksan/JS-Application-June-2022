@@ -35,13 +35,14 @@ function createMovieItem(movie) {
         </a>
     </div>`;
 
-    const catalog = section.querySelector('#movie .card-deck.d-flex.justify-content-center');
-    catalog.addEventListener('click', (event) => {
+    const details = li.querySelector('.btn-info');
+    details.addEventListener('click', (event) => {
         if (event.target.tagName == 'BUTTON') {
             event.preventDefault();
             const id = event.target.dataset.id;
             detailsPage(id);
         }
     });
+
     return li;
 }

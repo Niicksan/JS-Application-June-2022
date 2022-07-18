@@ -1,7 +1,5 @@
 import { showComments } from './showComments.js';
 
-function app() {
-    showComments();
-}
+document.querySelector('a').addEventListener('click', showComments);
 
-app();
+showComments();
