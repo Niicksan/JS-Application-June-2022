@@ -1,20 +1,22 @@
 import { post } from './api.js';
-import { createSubmitHandler } from './util.js';
+import { showView } from './util.js';
 
 
 const section = document.getElementById('form-sign-up');
 const form = section.querySelector('form');
+form.addEventListener('submit', onSubmit);
 
-createSubmitHandler(form, onSubmit);
-section.remove();
-let ctx = null;
-
-export function showRegister(inCtx) {
-    ctx = inCtx;
-    ctx.render(section);
+export function registerPage() {
+    showView(section);
 }
 
-async function onSubmit({ email, password, repeatPassword }) {
+async function onSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(form);
+
+    const email = formData.get('email');
+    const password = formData.get('password');
+
     if (email == '' || password == '') {
         return alert('All fields are required!');
     }
@@ -31,6 +33,6 @@ async function onSubmit({ email, password, repeatPassword }) {
 
     sessionStorage.setItem('userData', JSON.stringify(userData));
 
-    ctx.checkUserNav();
-    ctx.goTo('home');
+    updateNav();
+    homePage();
 }

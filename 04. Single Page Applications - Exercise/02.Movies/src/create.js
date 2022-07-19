@@ -1,28 +1,32 @@
 import { post } from './api.js';
-import { createSubmitHandler } from './util.js';
+import { homePage } from './home.js';
+import { showView } from './util.js';
 
-
-const section = document.getElementById('add-movie');
+const section = document.querySelector('#add-movie');
 const form = section.querySelector('form');
+form.addEventListener('submit', onSubmit);
 
-createSubmitHandler(form, onSubmit);
-
-section.remove();
-let ctx = null;
-
-export function showCreate(inCtx) {
-    ctx = inCtx;
-    ctx.render(section);
+export function createPage() {
+    showView(section);
 }
 
-async function onSubmit({ title, description, img }) {
-    const userData = JSON.parse(sessionStorage.getItem('userData'));
+async function onSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(form);
 
+    const title = formData.get('title');
+    const description = formData.get('description');
+    const img = formData.get('imageUrl');
+
+    await createMovie(title, description, img);
+    form.reset();
+    homePage();
+}
+
+async function createMovie(title, description, img) {
     if (title == '' || description == '' || !img) {
         return alert('All fields are required!');
     }
 
-    const { _id } = await post('/data/movies', { title, description, img, userId: userData.id });
-    ctx.checkUserNav();
-    ctx.goTo('home');
+    await post('/data/movies', { title, description, img });
 }

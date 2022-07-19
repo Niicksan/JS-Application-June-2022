@@ -1,40 +1,33 @@
-import { get } from './api.js';
 
+const views = [...document.querySelectorAll('.view-section')];
 
-const navUser = Array.from(document.getElementsByClassName('nav-item user'));
-const guestUser = Array.from(document.getElementsByClassName('nav-item guest'));
+function hideAll() {
+    views.forEach(v => v.style.display = 'none');
+}
 
-const userData = JSON.parse(sessionStorage.getItem('userData'));
+export function showView(section) {
+    hideAll();
+    section.style.display = 'block';
+}
 
-export function checkUserNav() {
-    if (userData != null) {
-        document.getElementById('welcome-msg').textContent = `Welcome, ${userData.email}`;
+export function spinner() {
+    const element = document.createElement('p');
+    element.innerHTML = 'Loading &hellip;';
 
-        navUser.forEach(e => e.style.display = 'inline-block');
-        guestUser.forEach(e => e.style.display = 'none');
+    return element;
+}
 
+export function updateNav() {
+    const user = JSON.parse(sessionStorage.getItem('userData'))
+
+    const msgContainer = document.getElementById('welcome-msg');
+    if (user) {
+        document.querySelectorAll('.user').forEach(e => e.style.display = 'inline-block');
+        document.querySelectorAll('.guest').forEach(e => e.style.display = 'none');
+        msgContainer.textContent = `Welcome, ${user.email}`;
     } else {
-        navUser.forEach(e => e.style.display = 'none');
-        guestUser.forEach(e => e.style.display = 'inline-block');
-    }
-}
-
-export function onLogout(ctx) {
-    get('/users/logout');
-
-    sessionStorage.removeItem('userData');
-
-    ctx.checkUserNav();
-    ctx.goTo('home');
-}
-
-export function createSubmitHandler(form, callback) {
-    form.addEventListener('submit', onSubmit);
-
-    function onSubmit(event) {
-        event.preventDefault();
-
-        const formData = new FormData(form);
-        callback(Object.fromEntries([...formData.entries()]));
+        document.querySelectorAll('.user').forEach(e => e.style.display = 'none');
+        document.querySelectorAll('.guest').forEach(e => e.style.display = 'inline-block');
+        msgContainer.textContent = '';
     }
 }

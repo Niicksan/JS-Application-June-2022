@@ -1,54 +1,39 @@
-import { showHome } from './home.js';
-import { showCreate } from './create.js';
-import { showEdit } from './edit.js';
-import { showDetails } from './details.js';
-import { showLogin } from './login.js';
-import { showRegister } from './register.js';
+import { homePage } from './home.js';
+import { loginPage } from './login.js';
+import { registerPage } from './register.js';
+import { createPage } from './create.js';
+import { updateNav } from './util.js';
 
-import { checkUserNav, onLogout } from './util.js';
-import { render } from './dom.js';
 
+const routes = {
+    '/': homePage,
+    '/login': loginPage,
+    '/logout': logout,
+    '/register': registerPage,
+    '/create': createPage,
+};
 
 document.querySelector('nav').addEventListener('click', onNavigate);
-
-const sections = {
-    'home': showHome,
-    'create': showCreate,
-    'edit': showEdit,
-    'details': showDetails,
-    'login': showLogin,
-    'register': showRegister,
-    'logout': onLogout
-}
-
-
-checkUserNav();
-
-// Start application in home view
-goTo('home');
+document.querySelector('#add-movie-button a').addEventListener('click', onNavigate);
 
 function onNavigate(event) {
-    if (event.target.tagName == 'A') {
-        const viewName = event.target.id;
+    if (event.target.tagName == 'A' && event.target.href) {
+        event.preventDefault();
 
-        if (goTo(viewName)) {
-            event.preventDefault();
+        const url = new URL(event.target.href);
+        const view = routes[url.pathname];
+
+        if (typeof view == 'function') {
+            view();
         }
     }
 }
 
-function goTo(viewName) {
-    const view = sections[viewName];
-
-    if (typeof view == 'function') {
-        view({
-            render,
-            goTo,
-            checkUserNav
-        });
-
-        return true;
-    } else {
-        return false;
-    }
+function logout() {
+    localStorage.removeItem('user');
+    updateNav();
 }
+
+// Start application in catalog view
+updateNav();
+homePage();

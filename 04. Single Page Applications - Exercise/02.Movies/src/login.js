@@ -1,20 +1,22 @@
 import { post } from './api.js';
-import { createSubmitHandler } from './util.js'
+import { homePage } from './home.js';
+import { showView, updateNav } from './util.js';
 
-
-const section = document.getElementById('form-login');
+const section = document.querySelector('#form-login');
 const form = section.querySelector('form');
+form.addEventListener('submit', onSubmit);
 
-createSubmitHandler(form, onSubmit)
-section.remove();
-let ctx = null;
-
-export function showLogin(inCtx) {
-    ctx = inCtx;
-    ctx.render(section);
+export function loginPage() {
+    showView(section);
 }
 
-async function onSubmit({ email, password }) {
+async function onSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(form);
+
+    const email = formData.get('email');
+    const password = formData.get('password');
+
     const data = await post('/users/login', { email, password });
 
     const userData = {
@@ -25,6 +27,8 @@ async function onSubmit({ email, password }) {
 
     sessionStorage.setItem('userData', JSON.stringify(userData));
 
-    ctx.checkUserNav();
-    ctx.goTo('home');
+    form.reset();
+
+    updateNav();
+    homePage();
 }

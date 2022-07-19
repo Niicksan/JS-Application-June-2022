@@ -1,9 +1,8 @@
-const section = document.getElementById('edit-movie');
+import { showView } from './util.js';
 
-section.remove();
-let ctx = null;
+const section = document.querySelector('#edit-movie');
 
-export function showEdit(inCtx) {
-    ctx = inCtx;
-    ctx.render(section);
+
+export function editPage() {
+    showView(section);
 }
