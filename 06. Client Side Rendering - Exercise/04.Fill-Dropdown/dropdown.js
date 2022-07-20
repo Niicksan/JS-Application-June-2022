@@ -16,7 +16,7 @@ const townsTemplate = (cities) => html`
 const townList = (city) => html`<option value="${city._id}">${city.text}</option>`;
 
 async function getAllCities() {
-    const cities = Object.values(await getCities());
+    const cities = Object.values(await getCities())
 
     render(townsTemplate(cities), menu);
 }
