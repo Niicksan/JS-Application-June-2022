@@ -1,6 +1,6 @@
 import { html, render } from '../node_modules/lit-html/lit-html.js';
 import { post } from '../data/api.js';
-import { load } from './home.js';
+import { showBooks } from './home.js';
 
 const createTemplate = (onSubmit) => html`
 <form id="add-form" @submit=${onSubmit}>
@@ -20,9 +20,16 @@ export function showCreateForm() {
     async function onSubmit(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
+        const title = formData.get('title');
+        const author = formData.get('author');
 
-        await post({ title: formData.get('title'), author: formData.get('author') });
+        if (!title || !author) {
+            alert('All fields are required!');
+            return;
+        }
+
+        await post({ title, author });
         event.target.reset();
-        load();
+        showBooks();
     }
 }

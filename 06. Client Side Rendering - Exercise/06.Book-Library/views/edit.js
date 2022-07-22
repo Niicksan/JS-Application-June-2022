@@ -2,7 +2,7 @@ import { html, render } from '../node_modules/lit-html/lit-html.js';
 import { showCreateForm } from './create.js';
 import { getBookById } from '../data/books.js';
 import { put } from '../data/api.js';
-import { load } from './home.js';
+import { showBooks } from './home.js';
 
 const editTemplate = (onSubmit, book) => html`
 <form id="add-form" @submit=${onSubmit}>
@@ -23,10 +23,17 @@ export async function showEditForm(id) {
     async function onSubmit(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
+        const title = formData.get('title');
+        const author = formData.get('author');
 
-        await put(id, { title: formData.get('title'), author: formData.get('author') });
+        if (!title || !author) {
+            alert('All fields are required!');
+            return;
+        }
+
+        await put(id, { title, author });
         event.target.reset();
-        load();
+        showBooks();
         showCreateForm();
     }
 }

@@ -6,8 +6,8 @@ import { del } from '../data/api.js';
 
 const body = document.querySelector('body');
 
-const homeTemplate = (load) => html`
-<button id="loadBooks" @click="${load}">LOAD ALL BOOKS</button>
+const homeTemplate = (onLoad) => html`
+<button id="loadBooks" @click="${onLoad}">LOAD ALL BOOKS</button>
 <table>
     <thead>
         <tr>
@@ -25,10 +25,10 @@ const homeTemplate = (load) => html`
 `;
 
 export function showHome() {
-    render(homeTemplate(load), body);
+    render(homeTemplate(showBooks), body);
 }
 
-export function load() {
+export function showBooks() {
     const tbody = document.querySelector('tbody');
 
     const booksTemplate = (books) => html`
@@ -46,9 +46,9 @@ export function load() {
     </tr>
     `;
 
-    showBooks();
+    loadAllBooks();
 
-    async function showBooks() {
+    async function loadAllBooks() {
         const books = Object.entries(await getAllBooks());
 
         render(booksTemplate(books), tbody);
@@ -62,5 +62,6 @@ export function load() {
     async function deleteBook(event) {
         const id = event.target.parentNode.parentNode.dataset.id;
         await del(id);
+        showBooks();
     }
 }
