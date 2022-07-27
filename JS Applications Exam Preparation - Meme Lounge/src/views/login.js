@@ -37,6 +37,7 @@ export function loginView(ctx) {
         }
 
         await login(email, password);
+        ctx.updateNav();
         ctx.page.redirect('/memes');
     }
 }
