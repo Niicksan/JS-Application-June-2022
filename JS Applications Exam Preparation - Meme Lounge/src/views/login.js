@@ -1,4 +1,3 @@
-import { post } from "../api/api.js";
 import { login } from "../api/users.js";
 import { html } from "../lib.js";
 
@@ -18,8 +17,7 @@ const loginTemplate = (onSubmit) => html`
             </div>
         </div>
     </form>
-</section>
-`;
+</section>`;
 
 export function loginView(ctx) {
     ctx.render(loginTemplate(onSubmit));
