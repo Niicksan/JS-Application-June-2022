@@ -1,6 +1,7 @@
 import { html, render, page } from './lib.js';
 import { catalogView } from './views/catalog.js';
 import { homeView } from './views/home.js';
+import { loginView } from './views/login.js';
 
 
 const main = document.querySelector('main');
@@ -10,7 +11,7 @@ page('/', homeView);
 page('/memes', catalogView);
 page('/memes/:id', () => console.log('details'));
 page('/edit/:id', () => console.log('edit'));
-page('/login', () => console.log('login'));
+page('/login', loginView);
 page('/login', () => console.log('login'));
 page('/register', () => console.log('register'));
 page('/create', () => console.log('create'));
