@@ -1,7 +1,7 @@
 import { html } from "../lib.js";
 
+
 const homeTemplate = () => html`
-<!-- Welcome Page ( Only for guest users ) -->
 <section id="welcome">
     <div id="welcome-container">
         <h1>Welcome To Meme Lounge</h1>
