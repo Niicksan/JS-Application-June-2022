@@ -1,3 +1,4 @@
+import { logout } from './api/users.js';
 import { html, render, page } from './lib.js';
 import { getUserData } from './util.js';
 import { catalogView } from './views/catalog.js';
@@ -6,6 +7,7 @@ import { loginView } from './views/login.js';
 import { registerView } from './views/register.js';
 
 
+document.getElementById('logoutBtn').addEventListener('click', onLogout);
 const main = document.querySelector('main');
 
 page(decorateContext);
@@ -45,5 +47,10 @@ function updateNav() {
         document.querySelector('.user').style.display = 'none';
         document.querySelector('.guest').style.display = 'block';
     }
+}
 
+function onLogout() {
+    logout();
+    updateNav();
+    page.redirect('/');
 }
