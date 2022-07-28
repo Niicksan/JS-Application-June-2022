@@ -319,7 +319,7 @@ describe('E2E tests', function () {
         });
     });
 
-    describe.only('CRUD [ 40 Points ]', () => {
+    describe('CRUD [ 40 Points ]', () => {
         const email = 'ivan@mail.bg';
         const password = '345321';
 

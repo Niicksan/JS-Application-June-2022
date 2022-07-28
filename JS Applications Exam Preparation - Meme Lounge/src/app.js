@@ -8,6 +8,7 @@ import { registerView } from './views/register.js';
 import { createView } from './views/create.js';
 import { detailsView } from './views/details.js';
 import { editView } from './views/edit.js';
+import { profileView } from './views/profile.js';
 
 
 document.getElementById('logoutBtn').addEventListener('click', onLogout);
@@ -19,10 +20,9 @@ page('/memes', catalogView);
 page('/memes/:id', detailsView);
 page('/edit/:id', editView);
 page('/login', loginView);
-page('/login', () => console.log('login'));
 page('/register', registerView);
 page('/create', createView);
-page('/profile', () => console.log('profile'));
+page('/profile', profileView);
 
 // Start Application
 updateNav();

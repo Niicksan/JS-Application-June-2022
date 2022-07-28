@@ -1,4 +1,4 @@
-import { deleteMeme, getAllMemes, getMemeById } from "../api/memes.js";
+import { deleteMeme, getMemeById } from "../api/memes.js";
 import { html } from "../lib.js";
 import { getUserData } from "../util.js";
 
@@ -17,7 +17,7 @@ const detailsTemplate = (meme, isOwner, onDelete) => html`
             <!-- Buttons Edit/Delete should be displayed only for creator of this meme  -->
             <a class="button warning" href="/edit/${meme._id}">Edit</a>
             <button @click=${onDelete} class="button danger">Delete</button>`
-        : ''}
+            : ''}
         </div>
     </div>
 </section>`;
