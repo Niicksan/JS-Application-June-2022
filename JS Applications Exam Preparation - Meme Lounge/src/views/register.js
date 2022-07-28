@@ -1,5 +1,6 @@
 import { register } from "../api/users.js";
 import { html } from "../lib.js";
+import { notify } from "../notify.js";
 
 
 const registerTemplate = (onSubmit) => html`
@@ -44,11 +45,11 @@ export function registerView(ctx) {
         const gender = formData.get('gender');
 
         if (!username || !email || !password || !gender) {
-            return alert('All fields are required!');
+            return notify('All fields are required!');
         }
 
         if (password !== rePass) {
-            return alert('Passwords don\'t match!');
+            return notify('Passwords don\'t match!');
         }
 
         await register(username, email, password, gender);

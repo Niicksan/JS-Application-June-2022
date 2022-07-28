@@ -1,3 +1,4 @@
+import { notify } from "../notify.js";
 import { clearUserData, getUserData } from "../util.js";
 
 
@@ -37,7 +38,7 @@ async function request(url, method, data) {
             return res.json();
         }
     } catch (error) {
-        alert(error.message)
+        notify(error.message)
         throw error;
     }
 }

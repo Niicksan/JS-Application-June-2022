@@ -1,5 +1,6 @@
 import { login } from "../api/users.js";
 import { html } from "../lib.js";
+import { notify } from "../notify.js";
 
 
 const loginTemplate = (onSubmit) => html`
@@ -31,7 +32,7 @@ export function loginView(ctx) {
         const password = formData.get('password').trim();
 
         if (!email || !password) {
-            return alert('All fields are required!');
+            return notify('All fields are required!');
         }
 
         await login(email, password);
