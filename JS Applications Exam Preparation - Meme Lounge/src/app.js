@@ -6,6 +6,7 @@ import { homeView } from './views/home.js';
 import { loginView } from './views/login.js';
 import { registerView } from './views/register.js';
 import { createView } from './views/create.js';
+import { detailsView } from './views/details.js';
 
 
 document.getElementById('logoutBtn').addEventListener('click', onLogout);
@@ -14,7 +15,7 @@ const main = document.querySelector('main');
 page(decorateContext);
 page('/', homeView);
 page('/memes', catalogView);
-page('/memes/:id', () => console.log('details'));
+page('/memes/:id', detailsView);
 page('/edit/:id', () => console.log('edit'));
 page('/login', loginView);
 page('/login', () => console.log('login'));
