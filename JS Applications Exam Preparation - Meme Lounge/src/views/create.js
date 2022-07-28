@@ -35,7 +35,7 @@ export function createView(ctx) {
         }
 
         await createMeme({ title, description, imageUrl });
-        ctx.updateNav();
+        event.target.reset();
         ctx.page.redirect('/memes');
     }
 }

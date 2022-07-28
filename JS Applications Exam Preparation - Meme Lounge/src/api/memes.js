@@ -1,4 +1,4 @@
-import { del, get, post } from "./api.js";
+import { get, post, put, del } from "./api.js";
 
 
 export async function getAllMemes() {
@@ -11,6 +11,10 @@ export async function getMemeById(id) {
 
 export async function createMeme(meme) {
     return post('/data/memes', meme);
+}
+
+export async function updateMeme(id, meme) {
+    return put('/data/memes/' + id, meme);
 }
 
 export async function deleteMeme(id) {
