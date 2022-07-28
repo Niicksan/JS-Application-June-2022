@@ -5,6 +5,7 @@ import { catalogView } from './views/catalog.js';
 import { homeView } from './views/home.js';
 import { loginView } from './views/login.js';
 import { registerView } from './views/register.js';
+import { createView } from './views/create.js';
 
 
 document.getElementById('logoutBtn').addEventListener('click', onLogout);
@@ -18,7 +19,7 @@ page('/edit/:id', () => console.log('edit'));
 page('/login', loginView);
 page('/login', () => console.log('login'));
 page('/register', registerView);
-page('/create', () => console.log('create'));
+page('/create', createView);
 page('/profile', () => console.log('profile'));
 
 // Start Application

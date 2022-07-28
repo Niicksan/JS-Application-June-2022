@@ -16,7 +16,7 @@ const homeTemplate = () => html`
 </section>`;
 
 export function homeView(ctx) {
-    if (getUserData) {
+    if (getUserData()) {
         ctx.page.redirect('/memes');
     } else {
         ctx.render(homeTemplate());

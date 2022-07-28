@@ -319,7 +319,7 @@ describe('E2E tests', function () {
         });
     });
 
-    describe('CRUD [ 40 Points ]', () => {
+    describe.only('CRUD [ 40 Points ]', () => {
         const email = 'ivan@mail.bg';
         const password = '345321';
 
@@ -708,7 +708,7 @@ describe('E2E tests', function () {
             const notification = await page.isVisible('#errorBox');
             expect(notification).to.be.true;
         });
-        
+
         it('Edit notification with invalid data [ 2.5 Points ]', async () => {
             // Login user
             const email = 'peter@abv.bg';
