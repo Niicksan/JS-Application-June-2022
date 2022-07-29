@@ -37,8 +37,10 @@ const detailsTemplate = (book, likes, isOwner, isUser, isLiked, onDelete, like) 
 </section>`;
 
 export async function detailsView(ctx) {
-    const book = await getBookById(ctx.params.id);
-    const likes = await getLikesByBooks(ctx.params.id);
+    const [book, likes] = await Promise.all([
+        getBookById(ctx.params.id),
+        getLikesByBooks(ctx.params.id)
+    ]);
 
     const userData = getUserData();
     const isUser = userData?.email;
