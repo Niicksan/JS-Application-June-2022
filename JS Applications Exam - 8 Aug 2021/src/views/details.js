@@ -1,8 +1,9 @@
 import { deleteBook, getBookById } from "../api/books.js";
+import { getLikesByBooks, likeBook, likedBookPerUser } from "../api/likes.js";
 import { html } from "../lib.js";
 import { getUserData } from "../util.js";
 
-const detailsTemplate = (book, isOwner, onDelete) => html`
+const detailsTemplate = (book, likes, isOwner, isUser, isLiked, onDelete, like) => html`
 <section id="details-page" class="details">
     <div class="book-information">
         <h3>${book.title}</h3>
@@ -13,16 +14,18 @@ const detailsTemplate = (book, isOwner, onDelete) => html`
             <!-- Edit/Delete buttons ( Only for creator of this book )  -->
             <a class="button" href="/edit/${book._id}">Edit</a>
             <a @click=${onDelete} class="button" href="#">Delete</a>`
-            : ''}
+        : ''}
 
+            ${isUser && !isOwner && !isLiked ? html`
             <!-- Bonus -->
             <!-- Like button ( Only for logged-in users, which is not creators of the current book ) -->
-            <a class="button" href="#">Like</a>
+            <a @click=${like} class="button" href="#">Like</a>`
+        : ''}
 
             <!-- ( for Guests and Users )  -->
             <div class="likes">
                 <img class="hearts" src="/images/heart.png">
-                <span id="total-likes">Likes: 0</span>
+                <span id="total-likes">Likes: ${likes}</span>
             </div>
             <!-- Bonus -->
         </div>
@@ -35,11 +38,18 @@ const detailsTemplate = (book, isOwner, onDelete) => html`
 
 export async function detailsView(ctx) {
     const book = await getBookById(ctx.params.id);
+    const likes = await getLikesByBooks(ctx.params.id);
 
     const userData = getUserData();
+    const isUser = userData?.email;
     const isOwner = userData?.id == book._ownerId;
 
-    ctx.render(detailsTemplate(book, isOwner, onDelete));
+    let isLiked = false;
+    if (userData) {
+        isLiked = await likedBookPerUser(ctx.params.id, userData.id);
+    }
+
+    ctx.render(detailsTemplate(book, likes, isOwner, isUser, isLiked, onDelete, like));
 
     async function onDelete() {
         const choice = confirm('Are you sure ypu want to delete this book?');
@@ -48,5 +58,10 @@ export async function detailsView(ctx) {
             await deleteBook(ctx.params.id);
             ctx.page.redirect('/');
         }
+    }
+
+    async function like() {
+        await likeBook({ bookId: ctx.params.id });
+        ctx.page.redirect('/books/' + ctx.params.id);
     }
 }
