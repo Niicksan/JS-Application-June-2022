@@ -2,7 +2,7 @@ import { render, page } from './lib.js';
 //import { getUserData } from './util.js';
 //import { dashboardView } from './views/dashboard.js';
 import { loginView } from './views/login.js';
-//import { registerView } from './views/register.js';
+import { registerView } from './views/register.js';
 //import { createView } from './views/create.js';
 //import { detailsView } from './views/details.js';
 //import { editView } from './views/edit.js';
@@ -18,7 +18,7 @@ page(decorateContext);
 //page('/books/:id', detailsView);
 //page('/edit/:id', editView);
 page('/login', loginView);
-//page('/register', registerView);
+page('/register', registerView);
 //page('/create', createView);
 //page('/profile', profileView);
 
