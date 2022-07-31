@@ -1,17 +1,17 @@
 import { logout } from "../api/users.js";
-import { html, render } from "../lib.js";
+import { html, render, page } from "../lib.js";
 import { getUserData } from "../util.js";
 
 const nav = document.querySelector('nav');
 
 const navbarTemplate = (isUser) => html`
-    ${isUser ? html`<a id="catalogLink" href="index.html">Dashboard</a>
+    ${isUser ? html`<a id="catalogLink" href="/">Dashboard</a>
     <div id="user">
         <a id="createLink" href="/create">Create Furniture</a>
-        <a id="profileLink" href="/my-furniture">My Publications</a>
+        <a id="profileLink" href="/profile">My Publications</a>
         <a @click=${onLogout} id="logoutBtn" href="javascript:void(0)">Logout</a>
     </div>`
-    : html`<a id="catalogLink" href="index">Dashboard</a>
+    : html`<a id="catalogLink" href="/">Dashboard</a>
     <div id="guest">
         <a id="loginLink" href="/login" class="active">Login</a>
         <a id="registerLink" href="/register">Register</a>

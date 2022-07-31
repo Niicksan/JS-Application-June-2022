@@ -1,12 +1,12 @@
 import { render, page } from './lib.js';
 //import { getUserData } from './util.js';
-//import { dashboardView } from './views/dashboard.js';
+import { dashboardView } from './views/dashboard.js';
 import { loginView } from './views/login.js';
 import { registerView } from './views/register.js';
-//import { createView } from './views/create.js';
-//import { detailsView } from './views/details.js';
-//import { editView } from './views/edit.js';
-//import { profileView } from './views/profile.js';
+import { createView } from './views/create.js';
+import { detailsView } from './views/details.js';
+import { editView } from './views/edit.js';
+import { profileView } from './views/profile.js';
 import { navbarView } from './views/navbar.js';
 
 
@@ -14,13 +14,13 @@ import { navbarView } from './views/navbar.js';
 const main = document.querySelector('.container');
 
 page(decorateContext);
-//page('/', dashboardView);
-//page('/books/:id', detailsView);
-//page('/edit/:id', editView);
+page('/', dashboardView);
+page('/furniture/:id', detailsView);
+page('/edit/:id', editView);
 page('/login', loginView);
 page('/register', registerView);
-//page('/create', createView);
-//page('/profile', profileView);
+page('/create', createView);
+page('/profile', profileView);
 
 // Start Application
 navbarView();
