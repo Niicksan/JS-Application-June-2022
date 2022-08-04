@@ -11,7 +11,7 @@ const navbarTemplate = (isUser) => html`
 <ul>
     <!--Users and Guest-->
     <li><a href="/">Home</a></li>
-    <li><a href="#">Dashboard</a></li>
+    <li><a href="/dashboard">Dashboard</a></li>
     ${isUser ? html`
     <!--Only Guest-->
     <li><a href="/create">Create Postcard</a></li>
